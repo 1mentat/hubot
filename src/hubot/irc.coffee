@@ -28,7 +28,7 @@ class IrcBot extends Robot
     self = @
 
     options =
-      nick:     process.env.HUBOT_IRC_NICK
+      nick:     process.env.HUBOT_IRC_NICK or @name
       port:     process.env.HUBOT_IRC_PORT
       rooms:    process.env.HUBOT_IRC_ROOMS.split(",")
       server:   process.env.HUBOT_IRC_SERVER
@@ -42,7 +42,11 @@ class IrcBot extends Robot
           debug: true,
           port: options.port,
           stripColors: true,
+<<<<<<< .merge_file_U8CzlD
           floodProtection: true,
+=======
+          secure: if options.port is "6697" then true else false,
+>>>>>>> .merge_file_6hEur6
         }
 
     unless options.nickpass
@@ -58,8 +62,13 @@ class IrcBot extends Robot
         if from is 'NickServ' and text.indexOf('registered') isnt -1
           bot.say 'NickServ', "identify #{options.nickpass}"
         else if options.nickpass and from is 'NickServ' and text.indexOf('now identified') isnt -1
+<<<<<<< .merge_file_U8CzlD
             for room in options.rooms
                 @join room
+=======
+          for room in options.rooms
+            @join room
+>>>>>>> .merge_file_6hEur6
 
     bot.addListener 'message', (from, to, message) ->
       console.log "From #{from} to #{to}: #{message}"
