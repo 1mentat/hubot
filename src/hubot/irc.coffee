@@ -58,8 +58,8 @@ class IrcBot extends Robot
         if from is 'NickServ' and text.indexOf('registered') isnt -1
           bot.say 'NickServ', "identify #{options.nickpass}"
         else if options.nickpass and from is 'NickServ' and text.indexOf('now identified') isnt -1
-            for room in options.rooms
-                @join room
+          for room in options.rooms
+            @join room
 
     bot.addListener 'message', (from, to, message) ->
       console.log "From #{from} to #{to}: #{message}"
